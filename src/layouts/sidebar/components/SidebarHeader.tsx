@@ -58,11 +58,8 @@ const SidebarHeader = ({ handleOpenSideBar }: SidebarHeaderType) => {
               <MenuOpenSideBarIcon />
             </OpenSidebarButton>
             <LogoContainer href="#" className="">
-              <LogoImage
-                // src="https://flowbite.com/docs/images/logo.svg"
-                alt="이미지자리"
-              />
-              <LogoText>로고</LogoText>
+              <LogoImage src="/src/assets/smartm2m_logo.png" alt="이미지자리" />
+              {/* <LogoText>로고</LogoText> */}
             </LogoContainer>
           </HeaderLeft>
           <HeaderRight>

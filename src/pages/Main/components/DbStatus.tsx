@@ -9,6 +9,8 @@ type Props = {
     dimension: number;
   };
   handleDeleteDb?: () => Promise<boolean>;
+  createLargeModelDB?: () => Promise<boolean>;
+  createMiniLmVectorDB?: () => Promise<boolean>;
 };
 
 interface data {
@@ -21,7 +23,12 @@ const initialState: data = {
   dimension: 0,
 };
 
-const DbStatus: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
+const DbStatus: React.FC<Props> = ({
+  dbStatus,
+  handleDeleteDb,
+  createLargeModelDB,
+  createMiniLmVectorDB,
+}) => {
   const [status, setStatus] = useState<data>(initialState);
   const [model, setModel] = useState<string>('');
   const onChangeModel = (value: string) => {
@@ -38,18 +45,19 @@ const DbStatus: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(dbStatus?.db_name);
-  console.log(status);
+  console.log(dbStatus?.dimension);
   console.log(model);
   useEffect(() => {
     dbStatus?.dimension === 1024 ? setModel('e5-large') : setModel('miniLM');
-  }, []);
+  }, [dbStatus?.dimension]);
 
   useEffect(() => {
     model === 'e5-large'
       ? setStatus({ ...status, dimension: 1024 })
-      : setStatus({ ...status, dimension: 384 });
-  }, []);
+      : model === 'miniLM'
+        ? setStatus({ ...status, dimension: 384 })
+        : setStatus({ ...status, dimension: 0 });
+  }, [model]);
 
   // Filter `option.label` match the user type `input`
   const filterOption = (input: string, option?: { label: string; value: string }) =>
@@ -99,9 +107,9 @@ const DbStatus: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
           placeholder={
             dbStatus?.dimension ? dbStatus.dimension.toString() : 'Vector DB 차원수를 입력해주세요.'
           }
-          value={status.dimension}
+          value={dbStatus?.dimension ? dbStatus.dimension : status.dimension}
           className="mb-4"
-          disabled={dbStatus?.dimension ? true : false}
+          disabled
         />
       </div>
       <div className="flex justify-end">
@@ -110,6 +118,7 @@ const DbStatus: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
           className="mr-2"
           style={{ backgroundColor: dbStatus?.db_name ? '#cbd5e1' : '#3b82f6' }}
           disabled={dbStatus?.db_name ? true : false}
+          onClick={model === 'e5-large' ? createLargeModelDB : createMiniLmVectorDB}
         >
           DB 생성
         </Button>

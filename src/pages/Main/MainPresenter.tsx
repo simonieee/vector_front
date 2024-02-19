@@ -8,13 +8,26 @@ type Props = {
   };
   handleDeleteDb?: () => Promise<boolean>;
   createLargeModelDB?: () => Promise<boolean>;
+  createMiniLmVectorDB?: () => Promise<boolean>;
 };
 
-const MainPresenter: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
+const MainPresenter: React.FC<Props> = ({
+  dbStatus,
+  handleDeleteDb,
+  createLargeModelDB,
+  createMiniLmVectorDB,
+}) => {
   const steps = [
     {
       title: '모델 및 DB 설정',
-      content: <DbStatus dbStatus={dbStatus} handleDeleteDb={handleDeleteDb} />,
+      content: (
+        <DbStatus
+          dbStatus={dbStatus}
+          handleDeleteDb={handleDeleteDb}
+          createLargeModelDB={createLargeModelDB}
+          createMiniLmVectorDB={createMiniLmVectorDB}
+        />
+      ),
     },
     {
       title: '사용자 질의 입력',
@@ -27,7 +40,7 @@ const MainPresenter: React.FC<Props> = ({ dbStatus, handleDeleteDb }) => {
   ];
   return (
     <div className="p-4 py-8 sm:ml-64 ">
-      <div className="mt-14 rounded-lg border-2 border-dashed border-gray-200 p-4 dark:border-gray-700">
+      <div className="mt-14 rounded-lg border-2 border-dashed border-gray-200 bg-white p-4 dark:border-gray-700">
         <Stepper steps={steps} />
       </div>
     </div>
