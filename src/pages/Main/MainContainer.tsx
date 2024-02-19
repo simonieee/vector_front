@@ -9,6 +9,26 @@ type DbStatusType = {
 
 const MainContainer = () => {
   const [DbStatus, setDbStatus] = useState<DbStatusType | undefined>();
+  /**
+   * MiniLM 모델 DB 생성
+   * @returns
+   */
+  const createMiniLmVectorDB = async () => {
+    const result = await VectordbApi.createMiniLmVectorDb();
+    if (result) {
+      setDbStatus({
+        db_name: result.db_name,
+        dimension: result.dimension,
+      });
+      console.log(result);
+      return true;
+    }
+    return false;
+  };
+  /**
+   * e5-large 모델 DB 생성
+   * @returns
+   */
   const createLargeModelDB = async () => {
     const result = await VectordbApi.createLargeLmVectorDb();
     if (result) {
@@ -27,12 +47,14 @@ const MainContainer = () => {
   const handleDbStatus = async () => {
     const result = await VectordbApi.getDbStatus();
     if (result) {
-      setDbStatus(result);
-      return true;
+      return result;
     }
     return false;
   };
-
+  /**
+   * Vector DB 삭제
+   * @returns
+   */
   const handleDeleteDb = async () => {
     const result = await VectordbApi.deleteDb();
     if (result) {
@@ -46,7 +68,16 @@ const MainContainer = () => {
    * 초기 Vector DB 상태 업데이트
    */
   useEffect(() => {
-    handleDbStatus();
+    const a = async () => {
+      const result = await handleDbStatus();
+      if (result) {
+        setDbStatus({
+          db_name: result.db_name,
+          dimension: result.dimension,
+        });
+      }
+    };
+    a();
   }, []);
 
   return (
@@ -54,6 +85,7 @@ const MainContainer = () => {
       dbStatus={DbStatus}
       handleDeleteDb={handleDeleteDb}
       createLargeModelDB={createLargeModelDB}
+      createMiniLmVectorDB={createMiniLmVectorDB}
     />
   );
 };
