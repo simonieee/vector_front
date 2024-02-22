@@ -33,9 +33,9 @@ const menuItems: MenuItem[] = [
     dropdownItems: [],
   },
   {
-    title: 'Testbed',
+    title: '테스트 결과',
     Icon: IconBrandProducthunt,
-    link: '/testbed',
+    link: '/testresult',
     isDropdown: false,
     dropdownItems: [],
   },
