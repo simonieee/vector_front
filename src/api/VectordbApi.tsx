@@ -42,12 +42,64 @@ const Api = {
     }
   },
   /**
+   * miniLm-model Vector DB 상태 조회
+   * @returns
+   */
+  getMiniLmDbStatus: async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/minilm_model/status_db/`);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      return error;
+    }
+  },
+  /**
+   * Vector DB 상태 조회
+   * @returns
+   */
+  getLargeDbStatus: async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/large_model/status_db/`);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      return error;
+    }
+  },
+  /**
    * Vector DB 초기화
    * @returns
    */
   deleteDb: async () => {
     try {
       const response = await axios.post(`${BASE_URL}/db/delete/`);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      return error;
+    }
+  },
+  /**
+   * miniLm-model Vector DB 초기화
+   * @returns
+   */
+  deleteMiniLmDb: async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/minilm_model/delete_db/`);
+      return response.data;
+    } catch (error) {
+      console.error('Error:', error);
+      return error;
+    }
+  },
+  /**
+   * e5-model Vector DB 초기화
+   * @returns
+   */
+  deleteLargeDb: async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}/large_model/delete_db/`);
       return response.data;
     } catch (error) {
       console.error('Error:', error);

@@ -64,7 +64,7 @@ const SidebarHeader = ({ handleOpenSideBar }: SidebarHeaderType) => {
           </HeaderLeft>
           <HeaderRight>
             <DarkModeToggle />
-            <Dropdown>
+            {/* <Dropdown>
               <div>
                 <DropdownButton
                   type="button"
@@ -129,7 +129,7 @@ const SidebarHeader = ({ handleOpenSideBar }: SidebarHeaderType) => {
                   </li>
                 </ul>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
           </HeaderRight>
         </HeaderWrapper>
       </HeaderContainer>
