@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RootLayout from './layouts/RootLayout';
-import { Main, Testbed } from './pages';
+import { Main, Testbed, VDBSetting } from './pages';
 
 const App = () => {
   return (
@@ -8,6 +8,7 @@ const App = () => {
       <RootLayout>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/settings" element={<VDBSetting />} />
           <Route path="/testresult" element={<Testbed />} />
         </Routes>
       </RootLayout>

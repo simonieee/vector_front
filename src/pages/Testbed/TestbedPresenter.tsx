@@ -78,6 +78,7 @@ const TestbedPresenter: React.FC<TestbedPresenterProps> = ({ testData }) => {
     });
     return (
       <Fragment>
+        <ScoreComparisonChart data={testData[record.key]} />
         <div className="mb-4">
           <Text italic className="ml-1">
             Test Model1 Data
@@ -90,7 +91,6 @@ const TestbedPresenter: React.FC<TestbedPresenterProps> = ({ testData }) => {
           </Text>
           <Table columns={columns} dataSource={model2Data} pagination={false} />
         </div>
-        <ScoreComparisonChart data={testData[record.key]} />
       </Fragment>
     );
   };
