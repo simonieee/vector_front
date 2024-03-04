@@ -26,9 +26,16 @@ type MenuItem = {
 
 const menuItems: MenuItem[] = [
   {
-    title: 'Dashboard',
+    title: '모델 테스트',
     Icon: IconDashboard, // 여기에 실제 SVG 경로 또는 컴포넌트를 넣습니다.
     link: '/',
+    isDropdown: false,
+    dropdownItems: [],
+  },
+  {
+    title: '모델 및 DB 설정',
+    Icon: IconLayoutKanban,
+    link: '/settings',
     isDropdown: false,
     dropdownItems: [],
   },
